@@ -1,12 +1,12 @@
+/*
 package by.javaguru.myproject.pool;
 
-import jakarta.annotation.PostConstruct;
+
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Slf4j
+
 @Component
 @ToString
 public class ConnectionPool {
@@ -25,12 +25,6 @@ public class ConnectionPool {
         this.url = url;
     }
 
-    @PostConstruct
-    private void init() {
-        log.info("Init pool");
-    }
 
-    private void destroy() {
-        log.info("destroy pool");
-    }
 }
+*/

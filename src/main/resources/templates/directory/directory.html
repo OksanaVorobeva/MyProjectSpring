@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Справочник</title>
+    <style>
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .tg td {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg th {
+            border-color: black;
+            border-style: solid;
+            border-width: 1px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            overflow: hidden;
+            padding: 10px 5px;
+            word-break: normal;
+        }
+
+        .tg .tg-baqh {
+            text-align: center;
+            vertical-align: top
+        }
+
+        .tg .tg-amwm {
+            font-weight: bold;
+            text-align: center;
+            vertical-align: top
+        }
+    </style>
+</head>
+<body>
+<h1>Справочник</h1>
+
+<p>Чувства-это сигналы психики о том,как человек живет,что
+    ему нравиться, а что не нравиться, какие потребности удовлетворяются,
+    а какие игнорируются и как складываются его отношения с окружающими.
+    Если научиться считывать сигналы можно жить более насыщенной и
+    счастливой жизнью. Для этого нужно распозновать и кважать свои чувства</p>
+
+<table class="tg">
+    <thead>
+    <tr>
+        <th class="tg-amwm">Чувство</th>
+        <th class="tg-amwm">Пример ситуации</th>
+        <th class="tg-amwm">Телесные ощущения</th>
+        <th class="tg-amwm">Мысли</th>
+        <th class="tg-amwm">Поведение</th>
+        <th class="tg-amwm">Редактировать</th>
+        <th class="tg-amwm">Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="directory : ${directory}">
+        <td class="tg-baqh" th:text="${directory.feeling}"></td>
+        <td class="tg-baqh" th:text="${directory.exampleSituation}"></td>
+        <td class="tg-baqh" th:text="${directory.bodilySensations}"></td>
+        <td class="tg-baqh" th:text="${directory.thoughts}"></td>
+        <td class="tg-baqh" th:text="${directory.behavior}"></td>
+        <td><a class="tg-baqh" th:href="@{/directory/{id}/update(id=${directory.id})}" methods="post">Edit</a></td>
+        <td><a class="tg-baqh" th:href="@{/directory/{id}/delete(id=${directory.id})}"  methods="get">Delete</a></td>
+
+    </tr>
+    </tbody>
+</table>
+
+<form action="/users" method="get">
+    <button type="submit">На главную страницу</button>
+</form>
+</body>
+</html>

@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="users")
-public class User implements BaseEntity <Long>{
+@Table(name = "users")
+public class User implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

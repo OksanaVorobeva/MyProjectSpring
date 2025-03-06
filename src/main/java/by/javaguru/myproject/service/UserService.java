@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
 import static by.javaguru.myproject.entity.QUser.user;
 
 @Service
@@ -50,11 +49,6 @@ public class UserService implements UserDetailsService {
                 .toList();
     }
 
-    public List<UserReadDto> findById(){
-        return userRepository.findAll().stream()
-                .map(userReadMapper::map)
-                .toList();
-    }
 
     public Optional<UserReadDto> findById(Long id) {
         return userRepository.findById(id).map(userReadMapper::map);
@@ -108,6 +102,8 @@ public class UserService implements UserDetailsService {
                 .flatMap(imageService::get);
     }
 
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
@@ -118,4 +114,5 @@ public class UserService implements UserDetailsService {
                 ))
                 .orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user: " + username));
     }
+
 }

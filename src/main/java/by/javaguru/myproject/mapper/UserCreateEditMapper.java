@@ -14,7 +14,7 @@ import java.util.function.Predicate;
 
 @Component
 @RequiredArgsConstructor
-public class UserCreateEditMapper implements Mapper<UserCreateEditDto, User>{
+public class UserCreateEditMapper implements Mapper<UserCreateEditDto, User> {
 
     private final PasswordEncoder passwordEncoder;
 
@@ -22,13 +22,13 @@ public class UserCreateEditMapper implements Mapper<UserCreateEditDto, User>{
     @Override
     public User map(UserCreateEditDto object) {
         User user = new User();
-        copy(object,user);
+        copy(object, user);
         return user;
     }
 
     @Override
     public User map(UserCreateEditDto fromObject, User toObject) {
-        copy(fromObject,toObject);
+        copy(fromObject, toObject);
         return toObject;
     }
 
@@ -44,6 +44,6 @@ public class UserCreateEditMapper implements Mapper<UserCreateEditDto, User>{
                 .ifPresent(toUser::setPassword);
         Optional.ofNullable(fromUser.getImage())
                 .filter(Predicate.not(MultipartFile::isEmpty))
-                .ifPresent(image->toUser.setImage(image.getOriginalFilename()));
+                .ifPresent(image -> toUser.setImage(image.getOriginalFilename()));
     }
 }
