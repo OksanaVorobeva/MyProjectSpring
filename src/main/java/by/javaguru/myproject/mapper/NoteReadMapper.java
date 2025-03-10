@@ -14,7 +14,7 @@ public class NoteReadMapper implements Mapper<Note, NoteReadeDto> {
 
     private final UserReadMapper userReadMapper;
 
-    @Override
+   @Override
     public NoteReadeDto map(Note object) {
         UserReadDto user = Optional.ofNullable(object.getUser())
                 .map(userReadMapper::map)
@@ -28,9 +28,8 @@ public class NoteReadMapper implements Mapper<Note, NoteReadeDto> {
                 object.getYourActions(),
                 object.getMyThoughtsAboutOthers(),
                 object.getMyThoughts(),
-                user
+                user.getId()
         );
     }
-
 
 }

@@ -4,12 +4,12 @@ import by.javaguru.myproject.dto.NoteCreateEditDto;
 import by.javaguru.myproject.entity.Note;
 import by.javaguru.myproject.entity.User;
 import by.javaguru.myproject.repository.UserRepository;
+import by.javaguru.myproject.service.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 
-import java.time.LocalDate;
-import java.util.Optional;
 
 
 @Component
@@ -33,19 +33,26 @@ public class NoteCreateEditMapper implements Mapper<NoteCreateEditDto, Note> {
 
     private void copy(NoteCreateEditDto object, Note note) {
         note.setFeeling(object.getFeeling());
-        note.setCreatedDate(LocalDate.now());
         note.setLifeSituation(object.getLifeSituation());
         note.setTelexSensation(object.getTelexSensation());
         note.setYourActions(object.getYourActions());
         note.setMyThoughtsAboutOthers(object.getMyThoughtsAboutOthers());
         note.setMyThoughts(object.getMyThoughts());
-        note.setUser(getUser(object.getUserId()));
+
+        note.setUser(getUser(object));
     }
 
-    private User getUser(Long userId) {
-        return Optional.ofNullable(userId)
-                .flatMap(userRepository::findById)
+    private User getUser(NoteCreateEditDto object) {
+        return userRepository.findById(getUserId())
                 .orElse(null);
     }
 
+    private Long getUserId() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof CustomUserDetails) {
+            return ((CustomUserDetails) principal).getId();
+        }
+        return null;
+    }
 }
+

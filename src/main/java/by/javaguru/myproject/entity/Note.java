@@ -41,10 +41,9 @@ public class Note implements BaseEntity<Long> {
     @Column(name = "my_thoughts")
     private String myThoughts;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-
 
 
 }

@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS users
     last_name  VARCHAR(64),
     role       VARCHAR(32),
     image      varchar(128),
-    password   varchar(128) DEFAULT '{noop}123'
+    password   varchar(128)
 );
 
 CREATE TABLE IF NOT EXISTS notes

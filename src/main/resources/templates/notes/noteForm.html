@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${isNew ? 'Создать заметку' : 'Редактировать заметку'}"></title>
+</head>
+<body>
+<!--<form th:action="${isNew ? @{/notes/create} : @{/notes/{id}/update(id=${noteId})}}" method="post" th:object="${notes}">
+    <input type="hidden" th:if="${!isNew}" name="_method" value="PUT">-->
+<form th:action="${isNew ? '/notes/create' : '/notes/' + noteId + '/update'}" method="post"  th:object="${notes}">
+  <!--  <input type="hidden" th:if="${!isNew}" name="_method" value="PUT">-->
+    <label for="feeling">Чувство:</label>
+    <input id="feeling" type="text" th:field="*{feeling}"/>
+    <br/>
+    <label for="lifeSituation">Ситуация из жизни:</label>
+    <input id="lifeSituation" type="text" th:field="*{lifeSituation}"/>
+    <br/>
+    <label for="telexSensation">Телесные ощущения:</label>
+    <input id="telexSensation" type="text" th:field="*{telexSensation}"/>
+    <br/>
+    <label for="yourActions">Твои действия:</label>
+    <input id="yourActions" type="text" th:field="*{yourActions}"/>
+    <br/>
+    <label for="myThoughtsAboutOthers">Мои мысли о других:</label>
+    <input id="myThoughtsAboutOthers" type="text" th:field="*{myThoughtsAboutOthers}"/>
+    <br/>
+    <label for="myThoughts">Мои мысли о себе:</label>
+    <input id="myThoughts" type="text" th:field="*{myThoughts}"/>
+    <br/>
+    <button type="submit" th:text="${isNew ? 'Сохранить' : 'Обновить'}"></button>
+</form>
+<form th:action="@{'/users/' + ${user.id}}" method="get">
+  <button type="submit">Личный кабинет</button>
+</form>
+</body>
+</html>

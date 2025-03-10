@@ -6,7 +6,7 @@ import com.querydsl.core.types.dsl.Expressions;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import java.beans.Expression;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

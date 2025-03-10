@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>User</title>
@@ -35,12 +36,24 @@
     <button type="submit">Remove</button>
 </form>
 <br>
-<form action="/directory" method="get">
+<br>
+<form th:action="@{/directory}" method="get">
     <button type="submit">Справочник</button>
 </form>
-
-<form th:action="@{/notes/{userId}(userId=${user.id})}"  method="get">
+<br>
+<br>
+<form th:action="@{/notes}" method="get">
     <button type="submit">Мой дневник</button>
+</form>
+<br>
+<br>
+<form th:action="@{/notes/create}" method="get">
+    <button type="submit">Новая запись</button>
+</form>
+<br>
+<br>
+<form th:action="@{/users}" th:if="${user.role.name() == 'ADMIN'}" method="get">
+    <button type="submit">Users</button>
 </form>
 </body>
 </html>

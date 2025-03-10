@@ -1,7 +1,7 @@
-INSERT INTO users (birth_date, first_name, last_name, role, username)
-VALUES ('1982-08-20', 'Oksana', 'Vorobeva', 'ADMIN', 'oksana@gmail.ru'),
-       ('1992-09-24', 'Ivan', 'Ivanov', 'USER', 'ivan@gmail.ru'),
-       ('2001-08-16', 'Pert', 'Petrov', 'USER', 'petr@gmail.ru');
+INSERT INTO users (birth_date, first_name, last_name, role, username,password)
+VALUES ('1982-08-20', 'Oksana', 'Vorobeva', 'ADMIN', 'oksana@gmail.ru','root'),
+       ('1992-09-24', 'Ivan', 'Ivanov', 'USER', 'ivan@gmail.ru','root'),
+       ('2001-08-16', 'Pert', 'Petrov', 'USER', 'petr@gmail.ru','root');
 
 INSERT INTO directory(feeling, example_situation, bodily_sensations, thoughts, behavior)
 VALUES ('злость', 'ejejejej', 'fkfkfkf', 'jdjdjdjd', 'ddjdjdj'),

@@ -60,8 +60,7 @@
         <th class="tg-amwm">Телесные ощущения</th>
         <th class="tg-amwm">Мысли</th>
         <th class="tg-amwm">Поведение</th>
-        <th class="tg-amwm">Редактировать</th>
-        <th class="tg-amwm">Удалить</th>
+
     </tr>
     </thead>
     <tbody>
@@ -71,15 +70,23 @@
         <td class="tg-baqh" th:text="${directory.bodilySensations}"></td>
         <td class="tg-baqh" th:text="${directory.thoughts}"></td>
         <td class="tg-baqh" th:text="${directory.behavior}"></td>
-        <td><a class="tg-baqh" th:href="@{/directory/{id}/update(id=${directory.id})}" methods="post">Edit</a></td>
-        <td><a class="tg-baqh" th:href="@{/directory/{id}/delete(id=${directory.id})}"  methods="get">Delete</a></td>
+        <td><a class="tg-baqh" th:href="@{/directory/{id}/update(id=${directory.id})}" th:if="${user != null and user.role.name() == 'ADMIN'}" methods="post">Edit</a></td>
+        <td><a class="tg-baqh" th:href="@{/directory/{id}/delete(id=${directory.id})}" th:if="${user != null and user.role.name() == 'ADMIN'}" methods="get">Delete</a></td>
 
     </tr>
     </tbody>
 </table>
+ <br>
+<br>
+<br>
+<br>
 
-<form action="/users" method="get">
-    <button type="submit">На главную страницу</button>
+
+<form th:action="@{/directory/create}" method="get" th:if="${user != null and user.role.name() == 'ADMIN'}">
+    <button type="submit">Новая запись</button>
+</form>
+<form th:action="@{'/users/' + ${user.id}}" method="get">
+    <button type="submit">Личный кабинет</button>
 </form>
 </body>
 </html>

@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${isNew ? 'Создать заметку' : 'Редактировать заметку'}"></title>
+</head>
+<body>
+<form th:action="${isNew ? '/directory/create' : '/directory/' + id + '/update'}" method="post"  th:object="${directory}">
+    <label for="feeling">Чувство:</label>
+    <input id="feeling" type="text" th:field="*{feeling}"/>
+    <br/>
+    <label for="exampleSituation">Ситуация:</label>
+    <input id="exampleSituation" type="text" th:field="*{exampleSituation}"/>
+    <br/>
+    <label for="bodilySensations">Ощущения:</label>
+    <input id="bodilySensations" type="text" th:field="*{bodilySensations}"/>
+    <br/>
+    <label for="thoughts">Мысли:</label>
+    <input id="thoughts" type="text" th:field="*{thoughts}"/>
+    <br/>
+    <label for="behavior">Поведение:</label>
+    <input id="behavior" type="text" th:field="*{behavior}"/>
+    <br/>
+    <button type="submit" th:text="${isNew ? 'Сохранить' : 'Обновить'}"></button>
+</form>
+<form th:action="@{'/users/' + ${user.id}}" method="get">
+    <button type="submit">Личный кабинет</button>
+</form>
+</body>
+</html>

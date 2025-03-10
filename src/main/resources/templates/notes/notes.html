@@ -56,6 +56,8 @@
         <th class="tg-amwm">Твои действия</th>
         <th class="tg-amwm">Мои мысли о других</th>
         <th class="tg-amwm">Мои мысли о себе</th>
+        <th class="tg-amwm">Редактировать</th>
+        <th class="tg-amwm">Удалить</th>
     </tr>
     </thead>
     <tbody>
@@ -67,9 +69,16 @@
         <td class="tg-baqh" th:text="${note.yourActions}"></td>
         <td class="tg-baqh" th:text="${note.myThoughtsAboutOthers}"></td>
         <td class="tg-baqh" th:text="${note.myThoughts}"></td>
+        <td><a class="tg-baqh" th:href="@{/notes/{id}/update(id=${note.id})}" methods="post">Edit</a></td>
+        <td><a class="tg-baqh" th:href="@{/notes/{id}/delete(id=${note.id})}"  methods="get">Delete</a></td>
+
     </tr>
     </tbody>
 </table>
-
+<br>
+<br>
+<form th:action="@{'/users/' + ${user.id}}" method="get">
+    <button type="submit">Личный кабинет</button>
+</form>
 </body>
 </html>

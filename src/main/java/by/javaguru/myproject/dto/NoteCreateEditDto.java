@@ -1,7 +1,5 @@
 package by.javaguru.myproject.dto;
 
-import by.javaguru.myproject.entity.User;
-import jakarta.persistence.*;
 import lombok.Value;
 import lombok.experimental.FieldNameConstants;
 
@@ -9,6 +7,7 @@ import java.time.LocalDate;
 
 @Value
 @FieldNameConstants
+
 public class NoteCreateEditDto {
 
     LocalDate createdDate;
