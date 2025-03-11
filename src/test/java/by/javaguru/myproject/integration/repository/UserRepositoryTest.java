@@ -12,14 +12,13 @@ import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @IT
 @RequiredArgsConstructor
@@ -29,6 +28,7 @@ public class UserRepositoryTest {
     private final EntityManager entityManager;
 
     private static final Long USER_ID = 3L;
+    private static final String USER_NAME = "oksana@gmail.ru";
 
     @Test
     void create(){
@@ -93,5 +93,12 @@ public class UserRepositoryTest {
         assertThat(user.getLastName()).isEqualTo("testUpdate");
         assertThat(user.getFirstName()).isEqualTo("testUpdate");
         assertNotNull(user.getId());
+    }
+
+    @Test
+    public void findAllByUserName(){
+        Optional<User> foundUser = userRepository.findByUsername(USER_NAME);
+        assertTrue(foundUser.isPresent());
+        assertEquals(USER_NAME, foundUser.get().getUsername());
     }
 }

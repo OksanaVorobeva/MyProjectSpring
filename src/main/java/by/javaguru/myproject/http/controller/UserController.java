@@ -50,9 +50,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id,
-                           Model model,
-                           @CurrentSecurityContext SecurityContext securityContext,
-                           @AuthenticationPrincipal UserDetails userDetails) {
+                           Model model) {
         return userService.findById(id)
                 .map(user -> {
                     model.addAttribute("user", user);
@@ -63,7 +61,7 @@ public class UserController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute @Validated UserCreateEditDto user,
+    public String create(@ModelAttribute  UserCreateEditDto user,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {

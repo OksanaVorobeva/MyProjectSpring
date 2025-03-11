@@ -28,7 +28,7 @@ public class NoteReadMapper implements Mapper<Note, NoteReadeDto> {
                 object.getYourActions(),
                 object.getMyThoughtsAboutOthers(),
                 object.getMyThoughts(),
-                user.getId()
+                user
         );
     }
 

@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
         return userRepository.findAll(predicate, pageable).map(userReadMapper::map);
     }
 
+
     public List<UserReadDto> findAll() {
         return userRepository.findAll().stream()
                 .map(userReadMapper::map)
@@ -72,7 +73,7 @@ public class UserServiceImpl implements UserService,UserDetailsService {
     }
 
     @SneakyThrows
-    private void uploadImage(MultipartFile image) {
+   public void uploadImage(MultipartFile image) {
         if (!image.isEmpty()) {
             imageService.upload(image.getOriginalFilename(), image.getInputStream());
         }

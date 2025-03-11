@@ -1,15 +1,14 @@
 package by.javaguru.myproject.mapper;
 
 import by.javaguru.myproject.dto.NoteCreateEditDto;
+import by.javaguru.myproject.dto.UserReadDto;
 import by.javaguru.myproject.entity.Note;
 import by.javaguru.myproject.entity.User;
 import by.javaguru.myproject.repository.UserRepository;
-import by.javaguru.myproject.service.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-
+import java.util.Optional;
 
 
 @Component
@@ -38,21 +37,14 @@ public class NoteCreateEditMapper implements Mapper<NoteCreateEditDto, Note> {
         note.setYourActions(object.getYourActions());
         note.setMyThoughtsAboutOthers(object.getMyThoughtsAboutOthers());
         note.setMyThoughts(object.getMyThoughts());
-
-        note.setUser(getUser(object));
+        note.setUser(getUser(object.getUserId()));
     }
 
-    private User getUser(NoteCreateEditDto object) {
-        return userRepository.findById(getUserId())
+
+  private User getUser(Long id) {
+        return Optional.ofNullable(id)
+                .flatMap(userRepository::findById)
                 .orElse(null);
-    }
-
-    private Long getUserId() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof CustomUserDetails) {
-            return ((CustomUserDetails) principal).getId();
-        }
-        return null;
     }
 }
 

@@ -1,11 +1,14 @@
 package by.javaguru.myproject.http.controller;
 
 import by.javaguru.myproject.dto.*;
+import by.javaguru.myproject.entity.Role;
 import by.javaguru.myproject.entity.User;
 import by.javaguru.myproject.service.CustomUserDetails;
 import by.javaguru.myproject.service.NoteService;
 import by.javaguru.myproject.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,14 +29,17 @@ public class NoteController {
     private final NoteService noteService;
     private final UserService userService;
 
+
     @GetMapping
     public String getAllNotes(Model model) {
-        Long userId = getUser().getId();
+       Long userId = getUser().getId();
         List<NoteReadeDto> notes = noteService.findAllNoteByIdUser(userId);
         model.addAttribute("user", getUser());
         model.addAttribute("notes", notes);
         return "notes/notes";
     }
+
+
 
     @GetMapping("/{id}/delete")
     public String deleteNote(@PathVariable("id") Long noteId) {
@@ -56,6 +62,8 @@ public class NoteController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+
+
     @PostMapping("/{id}/update")
     public String update(@PathVariable("id") Long id, @ModelAttribute ("notes")
     NoteCreateEditDto notes) {
@@ -66,7 +74,6 @@ public class NoteController {
 
     @PostMapping("/create")
     public String create(@ModelAttribute NoteCreateEditDto notes) {
-       // noteService.create(notes,getUserId());
         noteService.create(notes,getUser().getId());
         return "redirect:/notes";
     }

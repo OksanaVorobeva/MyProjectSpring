@@ -2,6 +2,7 @@ package by.javaguru.myproject.service;
 
 import by.javaguru.myproject.dto.NoteCreateEditDto;
 import by.javaguru.myproject.dto.NoteReadeDto;
+import by.javaguru.myproject.dto.UserReadDto;
 
 import java.util.List;
 import java.util.Optional;

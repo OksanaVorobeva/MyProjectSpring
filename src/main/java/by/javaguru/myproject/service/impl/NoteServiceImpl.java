@@ -2,6 +2,7 @@ package by.javaguru.myproject.service.impl;
 
 import by.javaguru.myproject.dto.NoteCreateEditDto;
 import by.javaguru.myproject.dto.NoteReadeDto;
+import by.javaguru.myproject.dto.UserReadDto;
 import by.javaguru.myproject.entity.Note;
 import by.javaguru.myproject.mapper.NoteCreateEditMapper;
 import by.javaguru.myproject.mapper.NoteReadMapper;
@@ -27,8 +28,8 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.findById(id).map(noteReadMapper::map);
     }
 
-    public List<NoteReadeDto> findAllNoteByIdUser(Long id) {
-        return noteRepository.findNote(id).stream()
+    public List<NoteReadeDto> findAllNoteByIdUser(Long userId) {
+        return noteRepository.findNote(userId).stream()
                 .map(noteReadMapper::map)
                 .toList();
 

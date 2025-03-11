@@ -3,6 +3,7 @@ package by.javaguru.myproject.integration.controller;
 
 
 import by.javaguru.myproject.annotation.IT;
+import by.javaguru.myproject.entity.Role;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.assertj.core.error.ActualIsNotEmpty;
@@ -12,8 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static by.javaguru.myproject.dto.UserCreateEditDto.Fields.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,16 +44,18 @@ public class UserControllerIT {
 
     @Test
     void create() throws Exception {
-        mockMvc.perform(post("/users")
-                        .param(username, "test2@gmail.com")
-                        .param(firstName, "Test")
-                        .param(lastName, "TestTest")
+
+        mockMvc.perform(post("/users/registration")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param(username, "test1@gmail.com")
+                        .param(rawPassword, "test")
+                        .param(firstName, "John")
+                        .param(lastName, "Doe")
                         .param(role, "ADMIN")
                         .param(birthDate, "01-01-2000")
                 )
-                .andExpectAll(
-                        status().is3xxRedirection(),
-                        redirectedUrlPattern("/users/login")
-                );
+                .andExpect(status().isOk())
+                .andExpect(redirectedUrl("/login"));
+
     }
 }

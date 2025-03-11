@@ -15,7 +15,7 @@ public class NoteReadeDto {
     String yourActions;
     String myThoughtsAboutOthers;
     String myThoughts;
-    //  UserReadDto userId;
-    Long userId;
+    UserReadDto userId;
+   // Long userId;
 
 }
